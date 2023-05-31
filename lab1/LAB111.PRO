@@ -1,0 +1,55 @@
+domains 
+    edgeT = edgeT(integer,integer)
+    cycleT = edgeT*
+  predicates
+  edge(integer,integer)
+  nondeterm euler(integer,integer,integer,cycleT,cycleT)
+  nondeterm IsEdge(edgeT)
+  len(cycleT,integer)
+  has(edgeT,cycleT)
+  nondeterm way(integer,integer)
+  reverse(cycleT, cycleT, cycleT).
+
+clauses
+  euler(A,A,1,Cycle,Cycle):-!.
+  euler(A,B,Len,Stack,Cycle):-
+    way(B,C),not(has(edgeT(B,C),Stack)),Len1=Len-1,
+    euler(A,C,Len1,[edgeT(B,C)|Stack],Cycle).
+
+reverse([],Z,Z).
+  reverse([H|T],Z,Acc) :- reverse(T,Z,[H|Acc]).
+ 
+IsEdge(edgeT(A,B)):-edge(A,B).
+ 
+len([_|Edges],Len):-!,len(Edges,Len1),Len=Len1+1.
+len([],0).
+ 
+has(Edge,[Edge|_]):-!.
+has(edgeT(A,B),[edgeT(B,A)|_]):-!.
+has(Edge,[_|Way]):-has(Edge,Way).
+ 
+way(A,B):-edge(A,B).
+way(A,B):-edge(B,A).
+
+ 
+edge(1, 2).
+edge(1, 3).
+edge(2, 3).
+edge(2, 4).
+edge(2, 5).
+edge(3, 5).
+edge(3, 6).
+edge(4, 5).
+edge(5, 6).
+
+goal
+nl, nl, nl, nl,
+  findall(Edge,IsEdge(Edge),Edges),
+  len(Edges,Len),
+  edge(A,B),
+  euler(A,B,Len,[edgeT(A,B)],Cycle),
+  reverse(Cycle, Res, []),
+  write(Res),nl, nl,
+  readint(R),
+  not(R = 0), !,
+  fail.

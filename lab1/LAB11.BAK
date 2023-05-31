@@ -21,27 +21,28 @@ clauses
     edge(d, a).
 
     way(A, B) :- edge(A, B);edge(B, A).
-    oneEdge(A, B, [A, B]):- way(A, B).
-    getEdges(A, L):- findall(Edg, oneEdge(A,_, Edg), L).
-    removeEdge([A, B], [[A,B]|TIn], Out) :- 
+    oneEdge(A, B, [A, B]):-way(A, B).
+    getEdges(_, L):- findall(Edg, oneEdge(_,_, Edg), L).
+    removeEdge([A, B], [[A,B]|TIn], Out) :-!, 
     	removeEdge([A, B], TIn, Out).
-    removeEdge([A, B], [[B, A]|TIn], Out) :-
+    removeEdge([A, B], [[B, A]|TIn], Out) :-!,
     	removeEdge([A, B], TIn, Out).
-    removeEdge([A, B], [HIn|TIn], [HOut|TOut]) :-
+    removeEdge(In, [HIn|TIn], [HOut|TOut]) :-!,
     	HOut = HIn,
-    	 removeEdge([A, B], TIn, TOut).
-    removeEdge([A, B], _, Res) :- !.
+    	 removeEdge(In, TIn, TOut), !.
+    removeEdge([A, B], [], Res).
     
+
     clear(E, []).
-    equil(L, L).
+    equil(L, L) :- not(L = L), write("not equil"),nl.
+   
     cycle(A, CurEdges,_, [H|T]) :-
       way(A,B),
       removeEdge([A,B], CurEdges, Temp),
-      not(equil(CurEdges, Temp)),
+      equil(CurEdges, Temp), !,
       H=A, cycle(B, Temp,_, T), !.
-   
+      
     
     main() :- 
-    	getEdges(a, L), removeEdge([a, b], L, Res), write(Res).
+    	getEdges(a, L), write(L), readln(_), cycle(_, L, _, Res) , write(Res).
     
-
