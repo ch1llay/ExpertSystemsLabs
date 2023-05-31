@@ -3,8 +3,8 @@ domains
     cycleT = edgeT*
 predicates
   edge(integer,integer)
-  nondeterm euler(integer,integer,integer,cycleT,cycleT)
-  nondeterm IsEdge(edgeT)
+  euler(integer,integer,integer,cycleT,cycleT)
+  IsEdge(edgeT)
   len(cycleT,integer)
   has(edgeT,cycleT)
   nondeterm way(integer,integer)
