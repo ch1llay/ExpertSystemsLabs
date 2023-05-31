@@ -1,7 +1,7 @@
 domains 
     edgeT = edgeT(integer,integer)
     cycleT = edgeT*
-  predicates
+predicates
   edge(integer,integer)
   nondeterm euler(integer,integer,integer,cycleT,cycleT)
   nondeterm IsEdge(edgeT)
@@ -9,6 +9,7 @@ domains
   has(edgeT,cycleT)
   nondeterm way(integer,integer)
   reverse(cycleT, cycleT, cycleT).
+  main.
 
 clauses
   euler(A,A,1,Cycle,Cycle):-!.
@@ -42,14 +43,18 @@ edge(3, 6).
 edge(4, 5).
 edge(5, 6).
 
-goal
+main:-
 nl, nl, nl, nl,
   findall(Edge,IsEdge(Edge),Edges),
   len(Edges,Len),
   edge(A,B),
   euler(A,B,Len,[edgeT(A,B)],Cycle),
+  write("euler path has cycle"), nl,
   reverse(Cycle, Res, []),
   write(Res),nl, nl,
   readint(R),
   not(R = 0), !,
   fail.
+
+main:-
+write("euler path has not cycle"), nl.
