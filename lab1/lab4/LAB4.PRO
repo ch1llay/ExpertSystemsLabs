@@ -1,0 +1,225 @@
+domains
+	conditions = integer*
+database
+	positive(integer,integer)
+	negative(integer,integer)
+predicates
+	mandotoryConditions(integer,string)
+	pointMandotoryConditions(integer,integer,string)
+	rule(integer,string)
+	cond(integer,string)
+	year(integer)
+	frontmen(integer)
+	foundationCity(integer)
+	amount_members(integer)
+	conditionals_elements(conditions)
+	expertism()
+	startWork()
+	consultt()
+	additionalConditions()
+	showAdditionalConditions()
+	choose()
+	remember(integer)
+	goOnChoosing()
+	eqstr(string)
+	show(integer)
+	ask(integer)
+	clear()
+	checkNegative(conditions)
+	notPositiveExisting(conditions)
+	member(integer,conditions)
+clauses
+	mandotoryConditions(1,"Year").
+	mandotoryConditions(2,"Frontman").
+	mandotoryConditions(3,"FondationCity").
+	mandotoryConditions(4,"Number of parts").
+
+	pointMandotoryConditions(1,1,"1960").
+	pointMandotoryConditions(1,2,"1972").
+	pointMandotoryConditions(1,3,"1981").
+	pointMandotoryConditions(1,4,"1984").
+	pointMandotoryConditions(1,5,"1985").
+	pointMandotoryConditions(1,6,"1988").
+	pointMandotoryConditions(1,7,"1989").
+	pointMandotoryConditions(1,8,"1990").
+	pointMandotoryConditions(1,9,"1995").
+	pointMandotoryConditions(1,10,"1996").
+	pointMandotoryConditions(1,11,"1998").
+	pointMandotoryConditions(1,12,"2000").
+	pointMandotoryConditions(1,13,"2006").
+	
+	pointMandotoryConditions(2,1,"M. Gorshkov").
+	pointMandotoryConditions(2,2,"V. Kipelov").
+	pointMandotoryConditions(2,3,"Mihalok Minsk").
+	pointMandotoryConditions(2,4,"Z. Ramazanova").
+	pointMandotoryConditions(2,5,"J. Hetfild").
+	pointMandotoryConditions(2,6,"N. Quin").
+	pointMandotoryConditions(2,7,"Ch.Benington").
+    pointMandotoryConditions(2,8,"J. Lennon").
+    pointMandotoryConditions(2,9,"D. Holland").
+    pointMandotoryConditions(2,10,"S. Zhukov").
+    pointMandotoryConditions(2,11,"A.Grigoriev-Apalonov").
+    pointMandotoryConditions(2,12,"A.Pletneva").
+    pointMandotoryConditions(2,13,"A.Feltskog").
+    pointMandotoryConditions(2,14,"L.Nustrom").
+    pointMandotoryConditions(2,15,"T. Dillard").
+
+	
+	pointMandotoryConditions(3,1,"St. Peterburg").
+	pointMandotoryConditions(3,2,"Moscow").
+	pointMandotoryConditions(3,3,"Minsk").
+	pointMandotoryConditions(3,4,"LA").
+	pointMandotoryConditions(3,5,"Limerik").
+	pointMandotoryConditions(3,6,"Liverpul").
+	pointMandotoryConditions(3,7,"Orange County").
+	pointMandotoryConditions(3,8,"Samara").
+	pointMandotoryConditions(3,9,"Stokgolm").
+	pointMandotoryConditions(3,10,"Kopengagen").
+	pointMandotoryConditions(3,11,"Florida").
+
+	pointMandotoryConditions(4,1,"3").
+	pointMandotoryConditions(4,2,"4").
+	pointMandotoryConditions(4,3,"5").
+
+	rule(1,"Korol i shut"):-year(6), frontmen(1), foundationCity(1), amount_members(2), conditionals_elements([1,3,5, 11, 12]).
+	rule(2,"Aria"):-year(5), frontmen(2), foundationCity(2), amount_members(3), conditionals_elements([1,3,5, 10]).
+	rule(3,"Lyapis Trubeckoy"):-year(8), frontmen(3), foundationCity(3), amount_members(2), conditionals_elements([1,3,5, 9, 11]).
+	rule(4,"Zemfira"):-year(11), frontmen(4), foundationCity(2), amount_members(2), conditionals_elements([1,3,6, 9, 11]).
+	rule(5,"Metallica"):-year(3), frontmen(5), foundationCity(4), amount_members(1), conditionals_elements([2, 3, 5, 8, 10]).
+	rule(6,"The Cranberries"):-year(7), frontmen(6), foundationCity(5), amount_members(1), conditionals_elements([2,3, 6, 8, 9, 10]).
+	rule(7,"Linkin Park"):-year(10), frontmen(7), foundationCity(4), amount_members(2), conditionals_elements([2,3,5, 7, 11]).
+	rule(8,"The Beatles"):-year(1), frontmen(8), foundationCity(6), amount_members(2), conditionals_elements([2,3, 5, 9]).
+	rule(9,"The offspring"):-year(4), frontmen(9), foundationCity(7), amount_members(2), conditionals_elements([2,3,5, 9, 11]).
+	rule(10,"Ruki vverh"):-year(9), frontmen(10), foundationCity(8), amount_members(1), conditionals_elements([1,4,5, 13, 14]).
+    rule(11,"Ivanushki Interational"):-year(11), frontmen(7), foundationCity(2), amount_members(1), conditionals_elements([1,4,5, 13, 15]).
+	rule(12,"Vintazh"):-year(13), frontmen(12), foundationCity(2), amount_members(1), conditionals_elements([1,4,6, 13, 15]).
+	rule(13,"Aqua"):-year(2), frontmen(13), foundationCity(9), amount_members(1), conditionals_elements([2,4,6, 15, 16]).
+	rule(14,"ABBA"):-year(7), frontmen(14), foundationCity(10), amount_members(3), conditionals_elements([2,4,6, 13, 14]).
+	rule(15,"Florida"):-year(12), frontmen(15), foundationCity(11), amount_members(1), conditionals_elements([2,4,5, 13, 15]).
+	
+	cond(1,"Russin").
+	cond(2,"English").
+	cond(3,"Rock").
+	cond(4,"Pop").
+	cond(5,"Male vocal").
+	cond(6,"Female vocal").
+	cond(7,"With piano").
+	cond(8,"Hard rock").
+	cond(9,"Pop rock").
+	cond(10,"Metal rock").
+	cond(11,"Punk rock").
+	cond(12,"Fantasy rock").
+	cond(13,"Dancing").
+	cond(14,"Lyrics").
+	cond(15,"Upbeat rhythms").
+	cond(16,"Simple text").
+
+	year(Choice):-positive(1,Choice).
+	frontmen(Choice):-positive(2,Choice).
+	foundationCity(Choice):-positive(3,Choice).
+	amount_members(Choice):-positive(4,Choice).
+	
+	notPositiveExisting(List):- cond(Number,_),positive(0,Number),not(member(Number,List)).
+
+	member(E,[E|_]).
+	member(E,[_|Tail]):-member(E,Tail).
+	
+	conditionals_elements(List):-not(notPositiveExisting(List)),checkNegative(List).
+
+	checkNegative([]).
+	checkNegative([Head|Tail]):-
+		negative(0,Head),
+		checkNegative(Tail).
+	
+	expertism():-
+		makewindow(1,7,7,"Expert System",0,0,25,80),
+		startWork(),
+		nl,
+		write("Good Bye!!!"),
+		nl,clear(),readchar(_),exit.
+	
+	startWork():-
+		mandotoryConditions(Number,Text),
+		not(positive(Number,_)),
+		write(Text),nl,
+		show(Number),
+		ask(Number),!,
+		startWork().
+	startWork():-
+		rule(_,_),consultt(),!,additionalConditions().
+	startWork():-
+		not(rule(_,_)),write("Sorry... System doesn't have a result for your request"),nl.
+	
+	consultt():-
+		rule(_,Text),
+		write(Text),nl,fail.
+
+	consultt().
+	
+	additionalConditions():-
+		goOnChoosing(),
+		showAdditionalConditions(),
+		choose(),!,
+		startWork().
+
+	additionalConditions().
+	
+	showAdditionalConditions():-
+		cond(Number,Text),
+		not(positive(0,Number)),
+		not(negative(0,Number)),
+		write(Number),write(" - "),
+		write(Text),nl,fail.
+
+	showAdditionalConditions().
+	
+	choose():-write("Your choice is (number) ---> "),
+		readint(Number),
+		cond(Number,_),
+		not(positive(0,Number)),
+		not(negative(0,Number)),!,
+		remember(Number).
+
+	choose():-write("Your choice isn't existing or already added, try one more time"),nl,choose().
+	
+	remember(Number):-
+		write("enter 'Yes' (positive conditions) or 'No' (negative conditions) --->"),
+		readln(Answer),
+		eqstr(Answer),
+		asserta(positive(0,Number)),!.
+
+	remember(Number):-asserta(negative(0,Number)).
+	
+	goOnChoosing():-
+		write("Continue choosing choices? [Input Yes for continue] --->"),
+		readln(Answer),
+		eqstr(Answer).
+	
+	eqstr("Yes").
+	eqstr("Y").
+	eqstr("y").
+	eqstr("yes").
+	
+	show(Number):-
+		pointMandotoryConditions(Number,NumberInside,Text),
+		write(NumberInside),write(" - "),
+		write(Text),nl,fail.
+
+	show(_).
+	
+	ask(Number):-
+		write("Your choice is (number) --->"),
+		readint(NumberInside),
+		pointMandotoryConditions(Number,NumberInside,_),
+		asserta(positive(Number,NumberInside)),!.
+	ask(Number):-
+		write("Your choice isn't existing"),nl,
+		ask(Number).
+	
+	clear():-
+		retract(positive(_,_)),fail;
+		retract(negative(_,_)),fail.
+	clear().
+	
+goal
+	expertism().
