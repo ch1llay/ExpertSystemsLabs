@@ -3,7 +3,6 @@ domains
 	variants = integer*
 database
 	positive(integer,integer)
-	negative(integer,integer)
 predicates
 	mandotoryConditions(integer,string)
 	pointMandotoryConditions(integer,integer,string)
@@ -16,18 +15,14 @@ predicates
 	conditionals_elements(conditions)
 	expertism()
 	startWork()
-	consultt()
-	additionalConditions()
-	showAdditionalConditions()
-	choose()
+	consultt(integer)
+	choose(integer)
 	remember(integer)
 	goOnChoosing()
 	eqstr(string)
 	show(integer)
 	ask(integer)
 	clear()
-	checkNegative(conditions)
-	notPositiveExisting(conditions)
 	member(integer,conditions)
 	chooseHelper(integer, integer, variants)
 clauses
@@ -127,8 +122,10 @@ clauses
 	pointMandotoryConditions(4,2,"4").
 	pointMandotoryConditions(4,3,"5").
 
-	rule(1,"Korol i shut"):-year(6), frontmen(1), foundationCity(1), amount_members(2), conditionals_elements([1,3,5, 11, 12]).
-	rule(2,"Aria"):-year(5), frontmen(2), foundationCity(2), amount_members(3), conditionals_elements([1,3,5, 10]).
+	rule(0,"Korol i shut1"):-year(6), frontmen(1), foundationCity(1), amount_members(2), conditionals_elements([1,3,5, 10, 11]).
+	rule(1,"Korol i shut2"):-year(6), frontmen(1), foundationCity(1), amount_members(2), conditionals_elements([1,3,5, 10, 12]).
+	rule(2,"Aria1"):-year(5), frontmen(2), foundationCity(2), amount_members(3), conditionals_elements([1,3,5, 10]).
+	rule(22,"Aria2"):-year(5), frontmen(2), foundationCity(2), amount_members(3), conditionals_elements([1,3,5, 11]).
 	rule(3,"Lyapis Trubeckoy"):-year(8), frontmen(3), foundationCity(3), amount_members(2), conditionals_elements([1,3,5, 9, 11]).
 	rule(4,"Zemfira"):-year(11), frontmen(4), foundationCity(2), amount_members(2), conditionals_elements([1,3,6, 9, 11]).
 	rule(5,"Metallica"):-year(3), frontmen(5), foundationCity(4), amount_members(1), conditionals_elements([2, 3, 5, 8, 10]).
@@ -165,18 +162,15 @@ clauses
 	foundationCity(Choice):-positive(3,Choice).
 	amount_members(Choice):-positive(4,Choice).
 	
-	notPositiveExisting(List):- cond(Number,_),positive(0,Number),not(member(Number,List)).
+	%notPositiveExisting(List):- cond(Number,_),positive(-1,Number).
+	%notPositiveExisting(List):-not(member(Number,List)).
 
 	member(E,[E|_]).
 	member(E,[_|Tail]):-member(E,Tail).
 	
 	conditionals_elements([]).
-	conditionals_elements([H|T]):- cond(H, Text), write(Text),nl, conditionals_elements(T).
-
-	checkNegative([]).
-	checkNegative([Head|Tail]):-
-		negative(0,Head),
-		checkNegative(Tail).
+	conditionals_elements([H|T]):- cond(H, _), positive(-1, H), conditionals_elements(T).                    %cond(H, Text), write(Text),nl, conditionals_elements(T).
+	conditionals_elements([H|T]):- cond(H, _), choose(H), conditionals_elements(T).                    %cond(H, Text), write(Text),nl, conditionals_elements(T).
 	
 	expertism():-
 		makewindow(1,7,7,"Expert System",0,0,25,80),
@@ -198,55 +192,34 @@ clauses
 		ask(Number),!,
 		startWork().
 	
+	startWork():-rule(R,_),consultt(R).
+	startWork():-rule(R,_).
 	startWork():-
-		rule(_,Group),nl, write("It's ", Group).
-	startWork():-
-		not(rule(_,_)),write("Sorry... System doesn't have a result for your request"),nl.
+		write("Sorry... System doesn't have a result for your request"),nl.
 	
-	consultt():-
-		rule(_,Text),
+	consultt(R):-
+		rule(R,Text),
 		write(Text),nl.
-
-	consultt().
 	
-	additionalConditions():-
-		goOnChoosing(),
-		showAdditionalConditions(),
-		choose(),!,
-		startWork().
-
-	additionalConditions().
 	
-	showAdditionalConditions():-
-		cond(Number,Text),
-		not(positive(0,Number)),
-		not(negative(0,Number)),
-		write(Number),write(" - "),
-		write(Text),nl,fail.
+	choose(CondNumber):-
+		not(positive(-1,CondNumber)),
+		cond(CondNumber, Text),
+		write(Text, " - "), nl, 		
+		remember(CondNumber).
 
-	showAdditionalConditions().
-	
-	choose():-write("Your choice is (number) ---> "),
-		readint(Number),
-		cond(Number,_),
-		not(positive(0,Number)),
-		not(negative(0,Number)),!,
-		remember(Number).
-
-	choose():-write("Your choice isn't existing or already added, try one more time"),nl,choose().
 	
 	remember(Number):-
 		write("enter 'Yes' (positive conditions) or 'No' (negative conditions) --->"),
 		readln(Answer),
 		eqstr(Answer),
-		asserta(positive(0,Number)),!.
-
-	remember(Number):-asserta(negative(0,Number)).
+		asserta(positive(-1,Number)),!.
 	
 	goOnChoosing():-
 		write("Continue choosing choices? [Input Yes for continue] --->"),
 		readln(Answer),
 		eqstr(Answer).
+	
 	
 	eqstr("Yes").
 	eqstr("Y").
@@ -270,8 +243,7 @@ clauses
 		ask(Number).
 	
 	clear():-
-		retract(positive(_,_)),fail;
-		retract(negative(_,_)),fail.
+		retract(positive(_,_)), fail.
 	clear().
 	
 goal
