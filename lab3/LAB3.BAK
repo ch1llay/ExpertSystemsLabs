@@ -125,10 +125,10 @@ it_is("Pop"):-
 do_expert_job:-
 	makewindow(1,7,7,"AN EXPERT SYSTEM",1,16,22,58), nl,
 	write("* * * * * * * * * * * * * * * * * * * *"),nl,
-	write(" WELCOME TO A CARTOON EXPERT SYSTEM "),nl,
+	write(" WELCOME TO A MUSIC GROUP EXPERT SYSTEM "),nl,
 	write(" "), nl,
 	write("Please answer the question about "),nl,
-	write("the cartoon you would like to watch"),nl,
+	write("the music group you would like to watch"),nl,
 	write("by typing in 'yes' or 'no'. "),nl,
 	write("* * * * * * * * * * * * * * * * * * * *"),nl,
 	do_consulting, readchar(_), nl,nl, removewindow, exit.

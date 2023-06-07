@@ -32,7 +32,7 @@ clauses
 	mandotoryConditions(1,"Year").
 	mandotoryConditions(2,"Frontman").
 	mandotoryConditions(3,"FondationCity").
-	mandotoryConditions(4,"Number of parts").
+	mandotoryConditions(4,"Amount memebers").
 
 	pointMandotoryConditions(1,1,"1960").
 	pointMandotoryConditions(1,2,"1972").
@@ -97,7 +97,7 @@ clauses
 	rule(14,"ABBA"):-year(7), frontmen(14), foundationCity(10), amount_members(3), conditionals_elements([2,4,6, 13, 14]).
 	rule(15,"Florida"):-year(12), frontmen(15), foundationCity(11), amount_members(1), conditionals_elements([2,4,5, 13, 15]).
 	
-	cond(1,"Russin").
+	cond(1,"Russian").
 	cond(2,"English").
 	cond(3,"Rock").
 	cond(4,"Pop").
@@ -124,7 +124,7 @@ clauses
 	member(E,[E|_]).
 	member(E,[_|Tail]):-member(E,Tail).
 	
-	conditionals_elements(List):-not(notPositiveExisting(List)),checkNegative(List).
+	conditionals_elements([H|T]):-member(N, [H|T]), cond(N, Text), write(Text),nl, fail.
 
 	checkNegative([]).
 	checkNegative([Head|Tail]):-
@@ -146,13 +146,13 @@ clauses
 		ask(Number),!,
 		startWork().
 	startWork():-
-		rule(_,_),consultt(),!,additionalConditions().
+		rule(_,Group),nl, write("It's ", Group).
 	startWork():-
 		not(rule(_,_)),write("Sorry... System doesn't have a result for your request"),nl.
 	
 	consultt():-
 		rule(_,Text),
-		write(Text),nl,fail.
+		write(Text),nl.
 
 	consultt().
 	

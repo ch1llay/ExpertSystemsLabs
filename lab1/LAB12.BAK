@@ -1,0 +1,26 @@
+DOMAINS
+    tree=tr(integer,tree,tree);e      
+PREDICATES
+    check(tree,tree)
+    main.
+CLAUSES
+    check(X,X):-!.
+    check(tr(_,L1,R1), tr(_, L2, R2)):-
+    check(L1,R2),check(R1,L2).
+    
+    check(tr(_, L1, R1), tr(_, L2, R2)) :-
+    	check(L1, L2),check(R1,R2). 
+
+
+main:-
+ check(tr(5,
+            tr(7,
+                tr(9,e,e),
+                tr(8,e,e)),
+           tr(6,e,
+                tr(4,
+                   tr(3,e,e),
+                   tr(1,e,e)))), 
+    tr(4, 
+    	tr(3, e, e),
+    	tr(1, e, e)))

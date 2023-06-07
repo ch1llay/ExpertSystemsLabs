@@ -1,14 +1,14 @@
 domains 
     edgeT = edgeT(integer,integer)
-    cycleT = edgeT*
+    edges = edgeT*
 predicates
   edge(integer,integer)
-  euler(integer,integer,integer,cycleT,cycleT)
+  euler(integer,integer,integer,edges,edges)
   IsEdge(edgeT)
-  len(cycleT,integer)
-  has(edgeT,cycleT)
+  len(edges,integer)
+  has(edgeT,edges)
   nondeterm way(integer,integer)
-  reverse(cycleT, cycleT, cycleT).
+  reverse(edges, edges, edges).
   main.
 
 clauses
